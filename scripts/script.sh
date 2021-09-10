@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-root_dir=/var/www/yogeshbhatt.com/ 
+root_dir=/var/www/carousel_implementation/ 
 
 cd $root_dir
 docker build -t carousel_implementation $root_dir
