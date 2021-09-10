@@ -1,0 +1,25 @@
+#add-imgs-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  label {
+    font-size: medium;
+    margin: 20px;
+    text-align: center;
+    background-color: rgb(72, 234, 255);
+    color: white;
+  }
+
+  label {
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px black;
+  }
+
+  label:click {
+    transform: scale(0.95);
+  }
+}
+#inpFiles {
+  display: none;
+}

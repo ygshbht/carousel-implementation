@@ -1,0 +1,37 @@
+#move-buttons {
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  // margin: auto;
+  z-index: 2;
+  pointer-events: none;
+
+  & > * {
+    pointer-events: auto;
+  }
+  #chevron-left,
+  #chevron-right {
+    background-color: white;
+  }
+  .icon-container {
+    display: flex;
+    & > * {
+      margin: 5px;
+    }
+    .move-input {
+      padding: 0;
+      width: 30px;
+      background-color: white;
+      // border-radius: 50%;
+    }
+  }
+}
+
+#carousel-container {
+  position: relative;
+}

@@ -1,0 +1,25 @@
+.container {
+  user-select: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  z-index: 0;
+
+  .wrapper {
+    // margin-left: 10%;
+    user-select: none;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // transform: rotateY(1deg);
+    // backface-visibility: hidden;
+    pointer-events: none;
+    .element {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
