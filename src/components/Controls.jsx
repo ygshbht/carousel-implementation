@@ -4,7 +4,7 @@ import CarouselType from "./CarouselType";
 import DistanceType from "./DistanceType";
 import Gap from "./Gap";
 import MouseVelocitySlider from "./MouseVelocitySlider";
-import TouchVelocitySlider from "./TouchVelocitySlider";
+// import TouchVelocitySlider from "./TouchVelocitySlider";
 
 export default function Controls() {
   return (
@@ -16,7 +16,7 @@ export default function Controls() {
           <AddImages />
           <Gap />
           <MouseVelocitySlider />
-          <TouchVelocitySlider />
+          {/* <TouchVelocitySlider /> */}
         </div>
         {/* <TouchVelocitySlider /> */}
       </div>

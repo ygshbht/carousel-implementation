@@ -35,35 +35,48 @@ export default function CarouselProvider({ children }) {
     touchVelMultiplier: 5,
     mouseVelMultiplier: 3,
     equidistantElements: true,
+    carousel: {},
+    moveLeftBy: 1,
+    moveRightBy: 1,
   });
 
   useEffect(() => {
+    let velocity = carouselData.carousel.velocity ?? 0;
+    console.log(carouselData.carousel.velocity);
+    let elements = document.querySelectorAll(".wrapper");
+    let container = document.querySelector(".container");
     setCarouselData((existingData) => {
-      let elements = document.querySelectorAll(".wrapper");
-      let container = document.querySelector(".container");
       if (existingData.carousel) existingData.carousel.velocity = 0;
       let allContainerChildren = container.querySelectorAll("*");
 
       let { mouseVelMultiplier, touchVelMultiplier, equidistantElements } =
         existingData;
 
-      let oldRotation = getRotationY(elements[0]);
+      let oldRotation;
       allContainerChildren.forEach((child) => {
         child.style.transform = "none";
         child.style.visibility = "visible";
         child.style.transformStyle = "initial";
       });
+      let carousel = {};
 
-      let carousel = new VirtualCarousel(container, elements, {
-        gap: existingData.gap,
-        setStyles: true,
-        isOrthographic: existingData.isOrthographic,
-        newRotation: oldRotation,
-        equidistantElements,
-      });
+      if (existingData.images.length > 0) {
+        oldRotation = getRotationY(elements[0]);
 
-      carousel.mouseVelMultiplier = mouseVelMultiplier;
-      carousel.touchVelMultiplier = touchVelMultiplier;
+        // let velocity = existingData.carousel.velocity ?? 0;
+
+        carousel = new VirtualCarousel(container, elements, {
+          gap: existingData.gap,
+          setStyles: true,
+          isOrthographic: existingData.isOrthographic,
+          newRotation: oldRotation,
+          equidistantElements,
+          velocity,
+        });
+
+        carousel.mouseVelMultiplier = mouseVelMultiplier;
+        carousel.touchVelMultiplier = touchVelMultiplier;
+      }
 
       addMouseEventsToElements(elements);
       return {

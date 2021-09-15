@@ -53,22 +53,24 @@ export default function MouseVelocitySlider() {
     setCarouselData((existingData) => {
       return {
         ...existingData,
-        mouseVelMultiplier: data,
+        mouseVelMultiplier: parseInt(data) + 1,
+        touchVelMultiplier: parseInt(data) + 1,
       };
     });
   }
 
   return (
     <div id="carousel-mouse-speed" className={classes.root}>
-      <Typography>Mouse drag speed</Typography>
+      <Typography>Drag speed</Typography>
       <PrettoSlider
         onChange={onGapChange}
         valueLabelDisplay="auto"
         aria-label="pretto slider"
         defaultValue={velocity}
         value={velocity}
-        min={0}
-        max={100}
+        min={1}
+        max={10}
+        step={0.1}
         // orientation="vertical"
         // step={}
       />

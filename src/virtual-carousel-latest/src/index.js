@@ -36,6 +36,7 @@ export default class Carousel {
     this.isOrthographic = modifiers.isOrthographic ?? false;
     this.clickRotationDuration = modifiers.clickRotationDuration ?? 350; //milliseconds
     this.minRotationStepDist = modifiers.minRotationStepDist ?? 35; // pixels
+    this.initialVelocity = modifiers.velocity ?? 0;
 
     this.newRotation = modifiers.newRotation ?? 0; //custom
     // console.log("constructer instantiated ", this.newRotation);
@@ -67,7 +68,6 @@ export default class Carousel {
       includeMargin: this.includeMargin,
       limitWidth: this.limitWidth,
     }).then((width) => {
-      console.log("width calculated is ", width);
       this.totalWidth = width;
       this.radius = calcTransformOrigin(this.elements, this.totalWidth);
       this.circumference = Math.abs(2 * Math.PI * this.radius);
@@ -108,29 +108,9 @@ export default class Carousel {
         elem.style.zIndex = `${calcZindex(this.totalRotation, extraDegress)}`;
       });
 
-      // below is a temporary fix as elements are not scaled properly initally
-      // if (this.isOrthographic && this.equidistantElements) {
-      //   let originalRotationDuration = this.clickRotationDuration;
-      //   this.clickRotationDuration = 1;
-      //   this.next();
-      //   this.previous();
-      //   this.clickRotationDuration = originalRotationDuration;
-      //   // this.setRotation(this.newRotation);
-      // } else {
-      //   // this.setRotation(this.newRotation);
-      // }
-      //custom
-      if (true) {
-        // console.log("new rotation is", this.newRotation);
-        if (this.newRotation !== 0.9999993263990709)
-          this.setRotation(this.newRotation);
-      }
-
-      // if (this.isOrthographic && this.equidistantElements) {
       if (this.isOrthographic && this.equidistantElements) {
         let rotation = this.newRotation;
         this.elements.forEach((elem) => {
-          // console.log("Setting new radius");
           let toRotate = rotation + elem.extraDegress;
           hideBackface(elem.querySelector("*"), toRotate);
 
@@ -143,10 +123,14 @@ export default class Carousel {
           hideBackface(elem.querySelector("*"), toRotate);
           rotateChild(elem.querySelector("*"), -toRotate);
           setNewRadius(elem, toRotate);
-
-          //  setNewRadius(elem, toRotate);
         });
       }
+      // if (this.initialVelocity) {
+      //   this.velocity = this.initialVelocity;
+      //   let force_interval = setInterval(() => {
+      //     addForce(force_interval, this);
+      //   }, this.accelerateInterval);
+      // }
     });
 
     this.container.onmouseleave = this.mouseleaveHandler;

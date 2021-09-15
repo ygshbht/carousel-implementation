@@ -18,13 +18,10 @@ export function calcTotalWidth(
       let imgs = project.querySelectorAll("img");
       imgs.forEach((img) => {
         if (!img) {
-          console.log("no image");
           return addWidthPostLoading();
         } else if (img.complete) {
-          console.log("image complete");
           return addWidthPostLoading();
         } else {
-          console.log("image not loaded yet");
           img.onload = addWidthPostLoading;
         }
       });
@@ -38,7 +35,6 @@ export function calcTotalWidth(
         project_list.forEach((project) => {
           counter += getVisibleWidth(project, includeMargin);
           counter += gap;
-          console.log("counter is ", counter);
         });
         resolve(counter);
       }
