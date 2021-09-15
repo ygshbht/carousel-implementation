@@ -51,7 +51,10 @@ export default function CarouselProvider({ children }) {
       let { mouseVelMultiplier, touchVelMultiplier, equidistantElements } =
         existingData;
 
-      let carousel = {};
+      let carousel = {
+        next() {},
+        previous() {},
+      };
 
       if (existingData.images.length > 0) {
         let oldRotation = getRotationY(elements[0]);
