@@ -42,7 +42,6 @@ export default function CarouselProvider({ children }) {
 
   useEffect(() => {
     let velocity = carouselData.carousel.velocity ?? 0;
-    console.log(carouselData.carousel.velocity);
     let elements = document.querySelectorAll(".wrapper");
     let container = document.querySelector(".container");
     setCarouselData((existingData) => {
@@ -52,18 +51,16 @@ export default function CarouselProvider({ children }) {
       let { mouseVelMultiplier, touchVelMultiplier, equidistantElements } =
         existingData;
 
-      let oldRotation;
-      allContainerChildren.forEach((child) => {
-        child.style.transform = "none";
-        child.style.visibility = "visible";
-        child.style.transformStyle = "initial";
-      });
       let carousel = {};
 
       if (existingData.images.length > 0) {
-        oldRotation = getRotationY(elements[0]);
+        let oldRotation = getRotationY(elements[0]);
 
-        // let velocity = existingData.carousel.velocity ?? 0;
+        allContainerChildren.forEach((child) => {
+          child.style.transform = "none";
+          child.style.visibility = "visible";
+          child.style.transformStyle = "initial";
+        });
 
         carousel = new VirtualCarousel(container, elements, {
           gap: existingData.gap,
@@ -76,6 +73,12 @@ export default function CarouselProvider({ children }) {
 
         carousel.mouseVelMultiplier = mouseVelMultiplier;
         carousel.touchVelMultiplier = touchVelMultiplier;
+      } else {
+        allContainerChildren.forEach((child) => {
+          child.style.transform = "none";
+          child.style.visibility = "visible";
+          child.style.transformStyle = "initial";
+        });
       }
 
       addMouseEventsToElements(elements);

@@ -125,6 +125,7 @@ export default class Carousel {
           setNewRadius(elem, toRotate);
         });
       }
+      if (this.newRotation) this.setRotation();
       // if (this.initialVelocity) {
       //   this.velocity = this.initialVelocity;
       //   let force_interval = setInterval(() => {
