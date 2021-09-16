@@ -69,7 +69,7 @@ export default function MouseVelocitySlider() {
         defaultValue={velocity}
         value={velocity}
         min={1}
-        max={10}
+        max={20}
         step={0.1}
         // orientation="vertical"
         // step={}
