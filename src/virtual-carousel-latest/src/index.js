@@ -100,7 +100,7 @@ export default class Carousel {
         }deg)`;
 
         //manual
-        if (this.isOrthographic && this.equidistantElements) {
+        if (this.isOrthographic) {
           let toRotate = (this.totalRotation + extraDegress) % 360;
           rotateChild(elem.querySelector("*"), -toRotate);
         }
@@ -108,13 +108,15 @@ export default class Carousel {
         elem.style.zIndex = `${calcZindex(this.totalRotation, extraDegress)}`;
       });
 
+      if (this.newRotation) this.setRotation();
+
       if (this.isOrthographic && this.equidistantElements) {
         let rotation = this.newRotation;
         this.elements.forEach((elem) => {
           let toRotate = rotation + elem.extraDegress;
-          hideBackface(elem.querySelector("*"), toRotate);
-
           setNewRadius(elem, toRotate);
+          hideBackface(elem.querySelector("*"), toRotate);
+          // rotateChild(elem.querySelector("*"), -toRotate);
         });
       } else if (this.isOrthographic && !this.equidistantElements) {
         let rotation = this.newRotation;
@@ -125,7 +127,6 @@ export default class Carousel {
           setNewRadius(elem, toRotate);
         });
       }
-      if (this.newRotation) this.setRotation();
       // if (this.initialVelocity) {
       //   this.velocity = this.initialVelocity;
       //   let force_interval = setInterval(() => {
