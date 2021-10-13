@@ -35,7 +35,7 @@ export function getVisibleWidth(element, includeMargin = false) {
 export function mouseHoldAtEnd(mouseXpositions, hold_threshold) {
   if (mouseXpositions.length <= 1) return false;
   let current_time = new Date().getTime();
-  let last_move_time = mouseXpositions[mouseXpositions.length - 1][1];
+  let last_move_time = mouseXpositions[mouseXpositions.length - 1].time;
   let difference = current_time - last_move_time;
 
   if (difference > hold_threshold) return true;
