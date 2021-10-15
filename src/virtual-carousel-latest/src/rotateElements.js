@@ -60,7 +60,13 @@ function animateClickRotaion(carousel, rotationAmount) {
     intervalTime
   );
 
+  let numOfRemainingRotations = numOfTimeToRotate;
+
+  // console.log("Ran");
+
   function animationIntervalFunction(interval) {
+    numOfRemainingRotations--;
+
     let firstElemRotation = getRotationY(elements[0]);
     let degreeToRotate = rotationPerInterval;
 
@@ -81,6 +87,7 @@ function animateClickRotaion(carousel, rotationAmount) {
       }
     });
 
+    if (numOfRemainingRotations === 0) clearInterval(interval);
     if (rotationAmount > 0) {
       if (remainingRotation <= 0) clearInterval(interval);
     } else {
