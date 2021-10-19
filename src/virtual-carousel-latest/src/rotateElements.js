@@ -12,6 +12,9 @@ export default function rotateElements(
   rotationDirection,
   numOfElementsToRotateBy
 ) {
+  if (carousel.shifting && carousel.shiftingInterval) {
+    clearInterval(carousel.shiftingInterval);
+  }
   let { minRotationStepDist, radius } = carousel;
   numOfElementsToRotateBy = numOfElementsToRotateBy ?? 1;
 
@@ -59,6 +62,8 @@ function animateClickRotaion(carousel, rotationAmount) {
     () => animationIntervalFunction(interval),
     intervalTime
   );
+  carousel.shifting = true;
+  carousel.shiftingInterval = interval;
 
   let numOfRemainingRotations = numOfTimeToRotate;
 
@@ -87,11 +92,23 @@ function animateClickRotaion(carousel, rotationAmount) {
       }
     });
 
-    if (numOfRemainingRotations === 0) clearInterval(interval);
+    if (numOfRemainingRotations === 0) {
+      carousel.shifting = false;
+      carousel.shiftingInterval = null;
+      clearInterval(interval);
+    }
     if (rotationAmount > 0) {
-      if (remainingRotation <= 0) clearInterval(interval);
+      if (remainingRotation <= 0) {
+        carousel.shifting = false;
+        carousel.shiftingInterval = null;
+        clearInterval(interval);
+      }
     } else {
-      if (remainingRotation >= 0) clearInterval(interval);
+      if (remainingRotation >= 0) {
+        carousel.shifting = false;
+        carousel.shiftingInterval = null;
+        clearInterval(interval);
+      }
     }
     remainingRotation = remainingRotation - rotationPerInterval;
   }
